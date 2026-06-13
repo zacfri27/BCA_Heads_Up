@@ -30,6 +30,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  
+  #Level 2 sensors means we can read the phone's tilt/movement sensor
+  sensors_plus: ^4.0.2
+
+  #Allows the data to be saved after the app closes 
+  shared_preferences: ^2.2.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
