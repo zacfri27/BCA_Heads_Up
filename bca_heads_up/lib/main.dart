@@ -1,6 +1,7 @@
 // lib/main.dart
 
 import 'package:flutter/material.dart';
+import 'screens/home_screen.dart';
 
 // This is always the first function that runs — like main() in Java
 void main() {
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       ),
 
       // The first screen the user sees
-      home: const HomeScreen(),
+      home: HomeScreen(),
     );
   }
 }

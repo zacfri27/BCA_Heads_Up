@@ -1,5 +1,3 @@
-// lib/screens/credits_screen.dart
-
 import 'package:flutter/material.dart';
 
 class CreditsScreen extends StatelessWidget {
@@ -8,7 +6,6 @@ class CreditsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // AppBar is the top bar with a title and back arrow
       appBar: AppBar(
         title: const Text('Credits'),
         backgroundColor: const Color(0xFFFF6B35),
@@ -19,13 +16,14 @@ class CreditsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Heads Up! Clone',
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+            Text(
+              'Heads Up! Clone',
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+            ),
             SizedBox(height: 16),
             Text(
-              'Built with Flutter & Dart.\n\n'
-              'Inspired by the Ellen DeGeneres party game.\n\n'
-              'This is a student learning project.',
+              'Built with Flutter and Dart.\n\n'
+              'This is a student learning project based on the Heads Up game idea.',
               style: TextStyle(fontSize: 16, height: 1.6),
             ),
           ],
