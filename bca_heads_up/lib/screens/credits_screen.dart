@@ -15,7 +15,10 @@ class CreditsScreen extends StatelessWidget {
     return Scaffold(
       // top bar of the screen
       appBar: AppBar(
-        title: const Text('Credits'),
+        title: const Text(
+          'Credits',
+          style: TextStyle(color: AppColors.textSoft),
+        ),
         backgroundColor: AppColors.background,
         foregroundColor: AppColors.textMain,
       ),
@@ -31,7 +34,11 @@ class CreditsScreen extends StatelessWidget {
           children: [
             Text(
               'BCA Heads Up!!!',
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: AppColors.textSoft,
+              ),
             ),
 
             SizedBox(height: 16),
@@ -43,9 +50,14 @@ class CreditsScreen extends StatelessWidget {
               '• home menu\n'
               '• category selection\n'
               '• word guessing screen\n'
-              '• timer\n'
+              '• custom timer\n'
+              '• custom sets\n'
               '• score tracking',
-              style: TextStyle(fontSize: 16, height: 1.6),
+              style: TextStyle(
+                fontSize: 16,
+                height: 1.6,
+                color: AppColors.textSoft,
+              ),
             ),
           ],
         ),
