@@ -14,6 +14,9 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
+  // how long each round lasts
+  int roundSeconds = 60;
+
   Future<void> openCreateDeckScreen() async {
     // open the create deck page and wait for it to send a deck back
     final newDeck = await Navigator.push<Category>(
@@ -40,6 +43,33 @@ class _CategoryScreenState extends State<CategoryScreen> {
         backgroundColor: AppColors.background,
         foregroundColor: AppColors.textMain,
         actions: [
+          PopupMenuButton<int>(
+            tooltip: 'Timer Length',
+            initialValue: roundSeconds,
+            onSelected: (value) {
+              setState(() {
+                roundSeconds = value;
+              });
+            },
+            itemBuilder: (context) => const [
+              PopupMenuItem(value: 30, child: Text('30 seconds')),
+              PopupMenuItem(value: 60, child: Text('60 seconds')),
+              PopupMenuItem(value: 90, child: Text('90 seconds')),
+            ],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Center(
+                child: Text(
+                  '${roundSeconds}s',
+                  style: const TextStyle(
+                    color: AppColors.accent,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
           // small plus button so the screen still keeps the same layout
           IconButton(
             onPressed: openCreateDeckScreen,
@@ -58,10 +88,69 @@ class _CategoryScreenState extends State<CategoryScreen> {
           mainAxisSpacing: 12, // vertical gap between cards
           childAspectRatio: 1.75, // width/height ratio of each card
         ),
-        itemCount: allCategories.length,
+        itemCount: allCategories.length + 1,
 
         itemBuilder: (context, index) {
-          final category = allCategories[index]; // current category
+          // first card is for making a custom deck
+          if (index == 0) {
+            return GestureDetector(
+              onTap: openCreateDeckScreen,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: AppColors.accent,
+                  borderRadius: BorderRadius.circular(18),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.18),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.accent.withValues(alpha: 0.35),
+                      blurRadius: 14,
+                      offset: const Offset(0, 6),
+                    ),
+                  ],
+                ),
+
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.add_circle_rounded,
+                      color: AppColors.background,
+                      size: 54,
+                    ),
+
+                    const SizedBox(height: 8),
+
+                    Text(
+                      'Create Deck',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.fredoka(
+                        color: AppColors.background,
+                        fontSize: 34,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                    const SizedBox(height: 4),
+
+                    const Text(
+                      'make your own words',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: AppColors.background,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
+
+          // subtract 1 because index 0 is the create deck card
+          final category = allCategories[index - 1]; // current category
 
           // GestureDetector wraps any widget and gives it tap behavior
           return GestureDetector(
@@ -70,7 +159,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => GameScreen(category: category),
+                  builder: (context) => GameScreen(
+                    category: category,
+                    roundSeconds: roundSeconds,
+                  ),
                 ),
               );
             },

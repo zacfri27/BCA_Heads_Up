@@ -19,7 +19,10 @@ class GameScreen extends StatefulWidget {
   // this stores the category that the user picked
   final Category category;
 
-  const GameScreen({super.key, required this.category});
+  // how long the round should be
+  final int roundSeconds;
+
+  const GameScreen({super.key, required this.category, this.roundSeconds = 60});
 
   @override
   State<GameScreen> createState() => _GameScreenState();
@@ -34,7 +37,7 @@ class _GameScreenState extends State<GameScreen> {
   int currentIndex = 0;
 
   // round timer
-  int timeLeft = 60;
+  late int timeLeft;
 
   // score numbers
   int score = 0;
@@ -47,8 +50,12 @@ class _GameScreenState extends State<GameScreen> {
   bool roundEnded = false;
 
   @override
+  @override
   void initState() {
     super.initState();
+
+    // use the timer length that got picked on the category screen
+    timeLeft = widget.roundSeconds;
 
     // widget.category is how this State class gets the category
     // from the GameScreen widget above
