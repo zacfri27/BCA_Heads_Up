@@ -38,7 +38,7 @@ class HomeScreen extends StatelessWidget {
                 const Text(
                   'BCA Heads Up!',
                   style: TextStyle(
-                    fontSize: 48,
+                    fontSize: 90,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                     letterSpacing: 2,
