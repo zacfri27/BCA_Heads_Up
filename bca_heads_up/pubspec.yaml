@@ -32,6 +32,7 @@ dependencies:
     sdk: flutter
 
   # Lets us read the phone's tilt/movement sensor (Level 2)
+  google_fonts: ^8.1.0
   sensors_plus: ^4.0.2
 
   # Lets us save data even after the app closes (Level 2)

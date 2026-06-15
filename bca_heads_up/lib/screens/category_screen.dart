@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import '../models/category.dart'; // the '..' means "go up one folder"
 import 'game_screen.dart';
+import '../theme/app_colors.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
@@ -12,8 +14,8 @@ class CategoryScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pick a Category'),
-        backgroundColor: const Color(0xFFFF6B35),
-        foregroundColor: Colors.white,
+        backgroundColor: AppColors.background,
+        foregroundColor: AppColors.textMain,
       ),
       // GridView is like ListView but shows items in a grid
       body: GridView.builder(
@@ -22,7 +24,7 @@ class CategoryScreen extends StatelessWidget {
           crossAxisCount: 2, // 2 columns
           crossAxisSpacing: 12, // horizontal gap between cards
           mainAxisSpacing: 12, // vertical gap between cards
-          childAspectRatio: 1.1, // width/height ratio of each card
+          childAspectRatio: 1.75, // width/height ratio of each card
         ),
         itemCount: builtInCategories.length,
         itemBuilder: (context, index) {
@@ -41,12 +43,9 @@ class CategoryScreen extends StatelessWidget {
             },
             child: Container(
               decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFFFF6B35), Color(0xFFFF8C42)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.circular(20),
+                color: AppColors.card,
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
               ),
               // Column to stack emoji on top of text
               child: Column(
@@ -56,16 +55,19 @@ class CategoryScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     child: Image.asset(
                       category.imagePath,
-                      width: 60, //change for larger images
-                      height: 60,
+                      width: 500,
+                      height: 350,
                       fit: BoxFit.cover,
                     ),
                   ),
+
+                  const SizedBox(height: 10),
+
                   Text(
                     category.name,
-                    style: const TextStyle(
+                    style: GoogleFonts.fredoka(
                       color: Colors.white,
-                      fontSize: 16,
+                      fontSize: 75,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

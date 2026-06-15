@@ -2,6 +2,7 @@
 
 // this gives us flutter stuff like Scaffold, Text, AppBar, etc
 import 'package:flutter/material.dart';
+import '../theme/app_colors.dart';
 
 // this is just the credits page
 // it does not really change, so stateless is fine
@@ -15,8 +16,8 @@ class CreditsScreen extends StatelessWidget {
       // top bar of the screen
       appBar: AppBar(
         title: const Text('Credits'),
-        backgroundColor: const Color(0xFFFF6B35),
-        foregroundColor: Colors.white,
+        backgroundColor: AppColors.background,
+        foregroundColor: AppColors.textMain,
       ),
 
       // main stuff on the page
@@ -29,28 +30,22 @@ class CreditsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Heads Up! Clone',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-              ),
+              'BCA Heads Up!!!',
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
             ),
 
             SizedBox(height: 16),
 
             Text(
               'Built with Flutter and Dart.\n\n'
-              'This is my student version of a Heads Up style game.\n\n'
+              'This is our student version of a Heads Up style game.\n\n'
               'Current features:\n'
               '• home menu\n'
               '• category selection\n'
               '• word guessing screen\n'
               '• timer\n'
               '• score tracking',
-              style: TextStyle(
-                fontSize: 16,
-                height: 1.6,
-              ),
+              style: TextStyle(fontSize: 16, height: 1.6),
             ),
           ],
         ),

@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'category_screen.dart';
 import 'credits_screen.dart';
+import '../theme/app_colors.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,15 +13,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // scaffold is the basic page template and gives us background, app bar, etc.
     return Scaffold(
-      // container lets us apply a background gradient to the whole screen
+      // container lets us apply a background color for the whole screen
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFFFF6B35), Color(0xFFFF8C42)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
+        decoration: const BoxDecoration(color: AppColors.background),
         // safeArea pushes content below the phone's notch/status bar
         child: SafeArea(
           // center puts its child in the middle of the screen (like css in Mr. Sen's web page project)
@@ -32,15 +28,15 @@ class HomeScreen extends StatelessWidget {
                 ClipRRect(
                   child: Image.asset(
                     'assets/home/title_logo.png',
-                    width: 150,
-                    height: 150,
+                    width: 500,
+                    height: 300,
                     fit: BoxFit.cover,
                   ),
                 ),
                 const SizedBox(height: 12), // SizedBox = invisible spacer
 
                 const Text(
-                  'Heads Up!',
+                  'BCA Heads Up!',
                   style: TextStyle(
                     fontSize: 48,
                     fontWeight: FontWeight.bold,
@@ -49,9 +45,13 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
 
-                const Text(
-                  'The ultimate party guessing game',
-                  style: TextStyle(color: Colors.white70, fontSize: 16),
+                Text(
+                  'The party guessing game for lower cafe dwellers',
+                  style: GoogleFonts.luckiestGuy(
+                    fontSize: 22,
+                    color: Colors.white,
+                    letterSpacing: 1.5,
+                  ),
                 ),
 
                 const SizedBox(height: 60),
@@ -119,8 +119,8 @@ class MenuButton extends StatelessWidget {
         icon: Icon(icon),
         label: Text(label, style: const TextStyle(fontSize: 18)),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.white,
-          foregroundColor: const Color(0xFFFF6B35),
+          backgroundColor: AppColors.card,
+          foregroundColor: AppColors.accent,
           padding: const EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),

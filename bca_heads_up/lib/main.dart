@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
+import 'theme/app_colors.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'theme/app_colors.dart';
 
 // This is always the first function that runs — like main() in Java
 void main() {
@@ -19,13 +22,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Heads Up!',
       debugShowCheckedModeBanner: false, // hides the red 'DEBUG' banner
-
       // Our color theme — orange feels energetic and fun
       theme: ThemeData(
+        scaffoldBackgroundColor: AppColors.background,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFFFF6B35), // hex color: orange
-          brightness: Brightness.dark,        // dark mode base
+          seedColor: AppColors.accent,
+          brightness: Brightness.dark,
         ),
+        textTheme: GoogleFonts.fredokaTextTheme(),
         useMaterial3: true,
       ),
 

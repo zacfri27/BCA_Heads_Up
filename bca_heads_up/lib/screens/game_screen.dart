@@ -1,5 +1,3 @@
-// lib/screens/game_screen.dart
-
 // need this for Timer
 import 'dart:async';
 
@@ -8,6 +6,12 @@ import 'package:flutter/material.dart';
 
 // this lets us use the Category class we made
 import '../models/category.dart';
+
+//lets us use universal colors
+import '../theme/app_colors.dart';
+
+//lets us use fonts
+import 'package:google_fonts/google_fonts.dart';
 
 // this screen has changing stuff like time, score, and words
 // so it has to be StatefulWidget, not StatelessWidget
@@ -60,7 +64,14 @@ class _GameScreenState extends State<GameScreen> {
   void startTimer() {
     // runs this code every 1 second
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (roundEnded) return;
+
       if (timeLeft <= 1) {
+        // make it show 0 before ending
+        setState(() {
+          timeLeft = 0;
+        });
+
         endGame();
       } else {
         // setState means "change this and redraw the screen"
@@ -72,25 +83,35 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   void markCorrect() {
+    // dont let buttons work after the round ended
+    if (roundEnded) return;
+
     // user got the word right
     setState(() {
       score++;
-      goToNextWord();
     });
+
+    goToNextWord();
   }
 
   void markPassed() {
+    // dont let buttons work after the round ended
+    if (roundEnded) return;
+
     // user skipped the word
     setState(() {
       passed++;
-      goToNextWord();
     });
+
+    goToNextWord();
   }
 
   void goToNextWord() {
     // if there are more words, move forward
     if (currentIndex < words.length - 1) {
-      currentIndex++;
+      setState(() {
+        currentIndex++;
+      });
     } else {
       // if there are no more words, end the round
       endGame();
@@ -145,16 +166,12 @@ class _GameScreenState extends State<GameScreen> {
     // get the current word
     final currentWord = words[currentIndex];
 
+    // make timer red near the end
+    final timerColor = timeLeft <= 10 ? Colors.redAccent : Colors.white;
+
     return Scaffold(
       body: Container(
-        // background color gradient
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFFFF6B35), Color(0xFFD7263D)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
+        decoration: BoxDecoration(color: AppColors.background),
 
         child: SafeArea(
           child: Column(
@@ -169,12 +186,14 @@ class _GameScreenState extends State<GameScreen> {
                     // left side of the top bar: image + category name
                     Row(
                       children: [
+                        // ClipRRect is what gives the image rounded corners
+                        // Image.asset by itself cant do borderRadius
                         ClipRRect(
                           borderRadius: BorderRadius.circular(6),
                           child: Image.asset(
                             widget.category.imagePath,
-                            width: 28,
-                            height: 28,
+                            width: 32,
+                            height: 32,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -193,8 +212,8 @@ class _GameScreenState extends State<GameScreen> {
 
                     Text(
                       '${timeLeft}s',
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: timerColor,
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
                       ),
@@ -209,9 +228,9 @@ class _GameScreenState extends State<GameScreen> {
               Text(
                 currentWord,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: GoogleFonts.fredoka(
                   color: Colors.white,
-                  fontSize: 52,
+                  fontSize: 54,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -236,7 +255,18 @@ class _GameScreenState extends State<GameScreen> {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: markPassed,
-                        child: const Text('Pass'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.cardLight,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: const Text(
+                          'skip',
+                          style: TextStyle(fontSize: 16),
+                        ),
                       ),
                     ),
 
@@ -245,7 +275,18 @@ class _GameScreenState extends State<GameScreen> {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: markCorrect,
-                        child: const Text('Got it!'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.accent,
+                          foregroundColor: AppColors.background,
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: const Text(
+                          'got it',
+                          style: TextStyle(fontSize: 16),
+                        ),
                       ),
                     ),
                   ],
