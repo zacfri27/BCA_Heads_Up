@@ -137,15 +137,28 @@ class _GameScreenState extends State<GameScreen> {
       barrierDismissible: false,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Round Over!'),
-          content: Text('Score: $score correct\nPassed: $passed'),
+          backgroundColor: AppColors.card,
+          title: const Text(
+            'Round Over!',
+            style: TextStyle(
+              color: AppColors.textMain,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          content: Text(
+            'Score: $score correct\nPassed: $passed',
+            style: const TextStyle(color: AppColors.textSoft, fontSize: 18),
+          ),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(context); // closes popup
                 Navigator.pop(context); // goes back to category screen
               },
-              child: const Text('Back to Categories'),
+              child: const Text(
+                'Back to Categories',
+                style: TextStyle(color: AppColors.accent),
+              ),
             ),
           ],
         );

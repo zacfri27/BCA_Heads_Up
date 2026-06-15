@@ -62,6 +62,11 @@ class HomeScreen extends StatelessWidget {
                 MenuButton(
                   label: 'Play',
                   icon: Icons.play_arrow_rounded,
+                  width: 320,
+                  backgroundColor: AppColors.accent,
+                  textColor: AppColors.background,
+                  verticalPadding: 22,
+                  fontSize: 24,
                   onTap: () {
                     Navigator.push(
                       context,
@@ -101,29 +106,46 @@ class HomeScreen extends StatelessWidget {
 class MenuButton extends StatelessWidget {
   final String label;
   final IconData icon;
-  final VoidCallback onTap; // VoidCallback = a function that takes no args
+  final VoidCallback onTap;
+
+  // optional style stuff so the play button can be bigger
+  final double width;
+  final Color backgroundColor;
+  final Color textColor;
+  final double verticalPadding;
+  final double fontSize;
 
   const MenuButton({
     super.key,
     required this.label,
     required this.icon,
     required this.onTap,
+    this.width = 250,
+    this.backgroundColor = AppColors.card,
+    this.textColor = AppColors.accent,
+    this.verticalPadding = 14,
+    this.fontSize = 18,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 250,
+      width: width,
       child: ElevatedButton.icon(
         onPressed: onTap,
-        icon: Icon(icon),
-        label: Text(label, style: const TextStyle(fontSize: 18)),
+        icon: Icon(icon, size: fontSize + 4),
+        label: Text(
+          label,
+          style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold),
+        ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.card,
-          foregroundColor: AppColors.accent,
-          padding: const EdgeInsets.symmetric(vertical: 16),
+          backgroundColor: backgroundColor,
+          foregroundColor: textColor,
+          padding: EdgeInsets.symmetric(vertical: verticalPadding),
+          elevation: 6,
+          shadowColor: backgroundColor.withOpacity(0.45),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(16),
           ),
         ),
       ),
