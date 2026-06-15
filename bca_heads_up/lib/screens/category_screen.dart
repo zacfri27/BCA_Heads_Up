@@ -19,10 +19,10 @@ class CategoryScreen extends StatelessWidget {
       body: GridView.builder(
         padding: const EdgeInsets.all(16),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,      // 2 columns
-          crossAxisSpacing: 12,   // horizontal gap between cards
-          mainAxisSpacing: 12,    // vertical gap between cards
-          childAspectRatio: 1.1,  // width/height ratio of each card
+          crossAxisCount: 2, // 2 columns
+          crossAxisSpacing: 12, // horizontal gap between cards
+          mainAxisSpacing: 12, // vertical gap between cards
+          childAspectRatio: 1.1, // width/height ratio of each card
         ),
         itemCount: builtInCategories.length,
         itemBuilder: (context, index) {
@@ -52,9 +52,15 @@ class CategoryScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(category.emoji,
-                      style: const TextStyle(fontSize: 44)),
-                  const SizedBox(height: 8),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.asset(
+                      category.imagePath,
+                      width: 60, //change for larger images
+                      height: 60,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                   Text(
                     category.name,
                     style: const TextStyle(

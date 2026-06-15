@@ -9,9 +9,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Scaffold is the basic page template — gives us background, app bar, etc.
+    // scaffold is the basic page template and gives us background, app bar, etc.
     return Scaffold(
-      // Container lets us apply a background gradient to the whole screen
+      // container lets us apply a background gradient to the whole screen
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -20,17 +20,23 @@ class HomeScreen extends StatelessWidget {
             end: Alignment.bottomRight,
           ),
         ),
-        // SafeArea pushes content below the phone's notch/status bar
+        // safeArea pushes content below the phone's notch/status bar
         child: SafeArea(
-          // Center puts its child in the middle of the screen
+          // center puts its child in the middle of the screen (like css in Mr. Sen's web page project)
           child: Center(
             // Column stacks widgets vertically (like a vertical list)
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center, // center vertically
               children: [
-
                 // ── Title area ──────────────────────────────
-                const Text('🙃', style: TextStyle(fontSize: 80)),
+                ClipRRect(
+                  child: Image.asset(
+                    'assets/home/title_logo.png',
+                    width: 150,
+                    height: 150,
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 const SizedBox(height: 12), // SizedBox = invisible spacer
 
                 const Text(
@@ -51,8 +57,8 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 60),
 
                 // ── Menu Buttons ─────────────────────────────
-                // Navigator.push() is how you go to a new screen.
-                // It's like a stack of cards — push adds one on top.
+                // Navigator.push() is how you go to a new screen
+                // like a stack of cards since push adds one on top
                 MenuButton(
                   label: 'Play',
                   icon: Icons.play_arrow_rounded,
@@ -80,7 +86,6 @@ class HomeScreen extends StatelessWidget {
                     );
                   },
                 ),
-
               ],
             ),
           ),

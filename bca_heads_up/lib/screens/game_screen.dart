@@ -15,10 +15,7 @@ class GameScreen extends StatefulWidget {
   // this stores the category that the user picked
   final Category category;
 
-  const GameScreen({
-    super.key,
-    required this.category,
-  });
+  const GameScreen({super.key, required this.category});
 
   @override
   State<GameScreen> createState() => _GameScreenState();
@@ -120,9 +117,7 @@ class _GameScreenState extends State<GameScreen> {
       builder: (context) {
         return AlertDialog(
           title: const Text('Round Over!'),
-          content: Text(
-            'Score: $score correct\nPassed: $passed',
-          ),
+          content: Text('Score: $score correct\nPassed: $passed'),
           actions: [
             TextButton(
               onPressed: () {
@@ -171,12 +166,29 @@ class _GameScreenState extends State<GameScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      '${widget.category.emoji} ${widget.category.name}',
-                      style: const TextStyle(
-                        color: Colors.white70,
-                        fontSize: 16,
-                      ),
+                    // left side of the top bar: image + category name
+                    Row(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(6),
+                          child: Image.asset(
+                            widget.category.imagePath,
+                            width: 28,
+                            height: 28,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+
+                        const SizedBox(width: 8),
+
+                        Text(
+                          widget.category.name,
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
                     ),
 
                     Text(
@@ -209,10 +221,7 @@ class _GameScreenState extends State<GameScreen> {
               // current score
               Text(
                 '✅ $score correct   ⏭ $passed passed',
-                style: const TextStyle(
-                  color: Colors.white70,
-                  fontSize: 16,
-                ),
+                style: const TextStyle(color: Colors.white70, fontSize: 16),
               ),
 
               const SizedBox(height: 16),
