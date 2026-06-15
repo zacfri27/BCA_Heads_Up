@@ -39,7 +39,7 @@ final List<Category> builtInCategories = [
     name: 'Teachers',
     imagePath: 'assets/categories/BCA_teachers.png',
     words: [
-        'Mr. David Reeves',
+        'Dr. Reeves',
         'Ms. Sorrentino',
         'Mr. Liva',
         'Mr. Lang',
